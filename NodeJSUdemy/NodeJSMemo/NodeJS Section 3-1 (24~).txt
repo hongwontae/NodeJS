@@ -59,7 +59,7 @@ libuv란 node.js가 사용하는 비동기 I/O 라이브러리이다. 운영체�
 4. 요청의 이해
 createServer의 콜백은 요청에 대한 응답을 설계하는 함수이다. 두 개의 인자를 받는데 첫 번쨰 인자는 들어온 요청에 대한 정보, 두 번쨰 인자는 나갈 응답에 대한 정보를 담고 있다. 변수명은 req, res로 보통 짓는다.
 
-req.url => 호스트 다음에 붙은 모든 주소이다.
+req.url => 호스트 다음에 붙은 모든 주소이다. String이다.
 req.method => 요청에 대한 HTTP method (url 브라우저에 단순히 입력하는 경우 get 메서드가 기본이다.)
 req.headers => 요청 헤더이다.
 
@@ -74,7 +74,18 @@ res.end() => 응답의 생성이 끝난 뒤에는 노드에게 알려야 한다.
 
 
 6. 라우터 요청
+<form> 태그의 속성
+action => 전송할 서버의 url
+methid => 전송될 http method
 
+<input>의 속성
+name => 보내는 데이터의 키역할을 한다고 보면 된다.
+
+form 태그의 button의 type이 submit이라면 자동으로 input의 데이터가 서버로 전송된다.
+받는 url는 문자열이다.
+
+
+7. 요청 리디렉션
 
 
 
