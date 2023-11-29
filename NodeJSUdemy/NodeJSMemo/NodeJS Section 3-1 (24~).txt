@@ -86,7 +86,9 @@ form 태그의 button의 type이 submit이라면 자동으로 input의 데이터
 
 
 7. 요청 리디렉션
-
+req에서 받는 모든 정보는 String이다.
+응답을 확인하기 위해 응답이 들어오면 file를 생성하고 statusCode = 302와 headers(Location,/)를 설정한다.
+=> 파일이 생성되고 다시 /로 돌아온다.
 
 
 
