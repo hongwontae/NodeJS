@@ -10,7 +10,7 @@ package.json => 현재 프로젝트에 관한 정보와 패키지 매너저를 �
 package.json의 scripts 키
 빌드, 실행 등에 사용되는 명령어를 선언하거나 패키지의 install, publish 전/후에 실행되는 스크립트 명령어를 선언할 때 사용된다.
 일반적으로 "key" : "HWT", npm run key => key이 내용이 실행된다.
-다만 start 같은 키워드는 터미널에 start만 넣어도 value가 실행된다. => 지정된 키워드가 존재한다.
+다만 start 같은 키워드는 터미널에 start만 넣어도 value가 실행된다. => 지정된 키워드가 존재한다. => power shell에서만
 
 
 2. 제 3자 패키지 설치하기
@@ -45,6 +45,8 @@ nodemon => 노드 애플리케이션을 실행하고 파일들이 변경 내역�
 package.json를 통해 명명해주어야 터미널이 로컬을 참조한다.
 
 명령 프롬프트는 npm run start(scripts key name)를 실행해야 한다.
+
+=> 중요한 점은 터미널은 전역 모듈을 고려하여 실행시킨다.
 
 
 4. 다양한 오류 유형 이해
