@@ -77,10 +77,14 @@ app.use(bodyParser.urlencoded(extneded: false))
 => extended : false, 비표준 대상의 분석이 가능한지를 나타낸다.
 
 
+8. Post 요청으로 미들웨어 실행 제한
+form를 통해 오는 http 메서드가 get이든 post이든 모두 받는다. => Post 한정으로 받고 싶다면?
+app.get(), app.post()처럼 get이나 post 요청에만 작동하게 쓸 수 있다.
+
+들어오는 모든 요청을 받는 app.use()보다 제한적인 요청을 받을 수 있도록 app.get()/ app.post()/ app.delete()..를 사용할 수 있다.
 
 
-
-
+9. Express 라우터 사용
 
 
 
