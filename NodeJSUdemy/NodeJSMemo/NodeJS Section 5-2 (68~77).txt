@@ -20,6 +20,22 @@ join()를 사용하는 이유는 자동으로 리눈스와 윈도우 시스템 �
 여기서 dirname은 routes 폴더를 가르킨다. __dirname은 자신이 사용된 파일의 경로를 알려준다.
 
 
+3. 내비게이션을 위한 헬퍼 함수 사용
+join() 경로를 구축할 떄 ../ 대신 ..를 사용하여 경로를 구축할 수 있다.
+helper 함수의 도움을 받아 상위 디렉터리를 얻을 수 있다.
+
+1. JS 파일을 생성한다.
+2. path 코어 모듈을 require한다.
+3. module.exports = path.dirname();
+(dirname은 경로의 폴더 이름을 회신한다.)
+4. dirname()의 인자로 전역 프로세스 변수를 사용하면 된다. => process
+5. dirname(process.mainModule) => 애플리케이션을 시작한 주요 모듈을 나타낸다.
+6. dirname(process.mainModule.filename) => 파일이름을 알아낸다.
+=> process.mainModule.filename => 애플리케이션이 실행될 수 있도록 해주는 파일의 경로를 알려준다.
+(process.mainModule.filename은 사라졌기 때문에 require.main.filename으로 대체한다.)
+=> dirname 안에 있기 때문에 디렉터리의 경로를 알아낼 수 있다.
+
+
 
 
 
