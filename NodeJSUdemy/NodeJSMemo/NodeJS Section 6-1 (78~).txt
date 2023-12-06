@@ -28,6 +28,24 @@ res.render()의 두 번쨰 인자는 view에 추가되어야 하는 데이터를
 res.render('파일명', {키:vlaue, 키:vlaue})/ 템플릿 엔진에서 #{key}를 통해 value에 접근할 수 있다.
 
 
+5. EJS로 작업하기 
+ejs란 Embedded JavaScript의 약자로, 자바스크립트가 내장되어 있는 html이다.
+
+ejs 템플릿 엔진에서 데이터를 수신하는 방법 => <%= key %> value가 view에 나타난다.
+
+ejs의 if문과 for문
+<%if() or for(){ %>
+html...
+<% }%>로 사용될 수 있다.
+=는 표현식이고 =가 없다면 JS 구문를 넣어서 사용할 수 있다.
+
+6. 부분적인 레이아웃 작업
+
+
+
+
+
+
 
 
 
