@@ -1,0 +1,5 @@
+1. module.exports => 파일에서 하나의 class, 변수, 객체, 배열 등만 보낼 수 있다.
+
+2. module.exports ={key : value, key : value} => 여러 개의 exports 가능
+
+3. module.exports.key = value === exports.key = value => 여러 개의 exports 가능
