@@ -46,7 +46,7 @@ package.json를 통해 명명해주어야 터미널이 로컬을 참조한다.
 
 명령 프롬프트는 npm run start(scripts key name)를 실행해야 한다.
 
-=> 중요한 점은 터미널은 전역 모듈을 고려하여 실행시킨다.
+=> 중요한 점은 일반적인 node scripts 명령어에서 터미널은 전역 모듈을 고려하여 실행시킨다.
 
 
 4. 다양한 오류 유형 이해
@@ -92,6 +92,15 @@ Run => Add Configuration를 선택하면 프로젝트에 디버깅을 구성할 
 10. 디버그 콘솔에서 변수 변경
 디버깅을 할 떄 변수를 지정해서 테스트를 할 수 있다.
 왼쪽 Local 탭의 값을 의미로 지정하여 디버깅을 할 수 있다.
+
+
+
+*** npm init => npm 프로세스를 사용하겠다. package.json 파일이 생성된다.
+*** npm install ... --save-dev 개발용 제 3자 패키지 설치
+*** npm install ... --g 전역 제 3자 패키지 설치
+*** package.json의 scripts 키 => npm 명령어 관한 객체이다. npm run key를 명령어로 사용하면 value의 로직이 실행된다. start 같은 명령어는 npm start만 해도 기능한다.
+*** package.json은 range version이고 package-lock-.json은 정확한 버전 명시이다.
+
 
 
 

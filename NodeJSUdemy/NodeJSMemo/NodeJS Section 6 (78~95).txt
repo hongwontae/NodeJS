@@ -59,6 +59,10 @@ ex) <%- include('includes/head.ejs') %> => 확장자까지 넣어줘야 한다.
 
 
 
+** ejs는 템플릿 엔진이다. app.set('view engine', 'ejs')/ app.set('views','views') => view engine으로 ejs를 사용하고 views의 위치는 views에 존재한다고 알리는 것이다. 만약 폴더명이 views라면 app.set(views, views)는 제외해도 된다.
+해당 요청의 응답으로 ejs를 반환하고 싶다면 res.render 메서드를 사용해야 한다. render('filename',{ejs에서 사용할 변수})
+*** ejs에 <%= %>는 변수 표현식이다./  <%- include('path') %>는 포함할 ejs이다. app.set()의 위치부터 시작한다.
+
 
 
 
