@@ -1,1 +1,14 @@
 1. 경로에 제품 ID 추가
+product-list.ejs 파일에서 버튼을 누르면 제품의 상세정보를 보여주고 싶다.
+=> 어떤 제품인지를 분간하기 위해 고유 식별자가 필요하다. => ID 같은 것이 필요하다.
+=> 각 제품이 save() 메서드가 호출될 떄 Math.random().toString()를 실행하여 고유의 번호를 부여한다.
+=> a 태그를 클릭하면 localhost:3000/products/123456 url 전송이 된다. => pageNotFound 페이지가 반환된다.
+
+
+2. 동적 매개변수 추출하기
+router('products/:productId',func)
+=> ':경로'는 동적 세그먼트이다. products/ 이후에 들어오는 모든 것을 처리한다는 것이다.
+
+들어오는 req에는 params라는 객체가 존재한다. 콜론 후에 오는 이름으로 productId를 사용했다. 콜론 다음에 사용하는 이름이 params 객체에서 데이터를 추출할 사용하는 이름이 된다.
+
+=> console.log()로 확인할 수 있다.
