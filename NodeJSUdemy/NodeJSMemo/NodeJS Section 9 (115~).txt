@@ -25,7 +25,13 @@ router('products/:productId',func)
 
 
 4. 제품 상세 보기 렌더링
+1. product-list.ejs에서 details 버튼을 누르면 a 태그로 인해 /products/number... url이 서버로 전송된다.
+2. 이 데이터는 router에 동적 매개변수를 받는 동적 세그먼트에 의해 받아자고 getProduct 함수가 실행된다.
+3. getProduct 함수는 동적 세그먼트에 의해 id가 인수로 들어가고 그 id로 find 메서드를 사용해서 일치하는 항목을 가져온다.
+4. 일치하는 항목만을 렌더링하는 page를 생성하고 반환한다.
 
+
+5. Post 요청으로 데이터 전달하기
 
 
 
