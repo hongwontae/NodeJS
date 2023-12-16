@@ -32,6 +32,13 @@ router('products/:productId',func)
 
 
 5. Post 요청으로 데이터 전달하기
+post 요청은 자동으로 입력 데이터가 본문에 포함된 요청을 준다. 그렇기 때문에 url에 무엇을 더할 필요가 없다.
+=> 미들웨어로 받을 떄 req.body에 데이터가 존재한다.
+include에 변수를 전달하고 싶다면 include 1,2) 1은 어떤 파일이 들어가야 하는지 2는 어떤 데이터를 줄 지 객체 형식으로 건네준다. {product(key) : product(value)}
+
+
+6. 장바구니 모델 추가하기
+
 
 
 
