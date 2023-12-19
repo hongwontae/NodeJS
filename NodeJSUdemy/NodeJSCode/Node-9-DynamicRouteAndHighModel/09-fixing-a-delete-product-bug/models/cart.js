@@ -20,8 +20,9 @@ module.exports = class Cart {
         prod => prod.id === id
       );
       const existingProduct = cart.products[existingProductIndex];
+      // 어느 하나의 details 값
+
       let updatedProduct;
-      // Add new product/ increase quantity
       if (existingProduct) {
         updatedProduct = { ...existingProduct };
         updatedProduct.qty = updatedProduct.qty + 1;

@@ -4,6 +4,10 @@ product-list.ejs 파일에서 버튼을 누르면 제품의 상세정보를 보�
 => 각 제품이 save() 메서드가 호출될 떄 Math.random().toString()를 실행하여 고유의 번호를 부여한다.
 => a 태그를 클릭하면 localhost:3000/products/123456 url 전송이 된다. => pageNotFound 페이지가 반환된다.
 
+1-1. product-list.ejs 파일에서 details <a> 태그를 누르게 되면 /products/<%= product.id%> URL 요청을 한다.
+1-2. 이 url 요청을 받는 라우터는 shop 라우터이다. /products/:productId를 통해 위의 product.id를 가져올 수 있다.
+(key:value 형식이다. productId : product.id)
+
 
 2. 동적 매개변수 추출하기
 router('products/:productId',func)
@@ -14,6 +18,13 @@ router('products/:productId',func)
 => console.log()로 확인할 수 있다.
 => :key의 데이터를 req.params.key를 통해 NodeJS에 가져올 수 있다.
 
+** 동적 매개변수를 받는 router가 존재하면 (products/:...) products/ 뒤에 오는 모든 것들을 받아들인다.
+    => 그렇기 때문에 위에서 아래로 읽는 Node.js 특성에 의해 올바르지 않은 router 전송이 될 수 도 있다.
+    => 동적 매개변수는 일반적인 router 뒤에 작성하는 것이 필요하다.
+
+2-1. details의 a 태그로 인해 동적 매개변수가 전달되고 라우터에서는 :로 받는다.
+2-2. controller에서는 req.params.productId(key)를 통해 동적 매개변수를 얻는다.
+
 
 3. 상품 상세 데이터 로드하기
 
@@ -22,13 +33,18 @@ router('products/:productId',func)
 
 =>  매개변수 값을 조정하는 것이다.
 
+3-1. details <a> 태그를 통해 url를 전송하여 라우터를 거쳐 controller에서 동적 매개변수를 얻는다.
+3-2. 해당 id를 통해 상품를 찾고 console.log()에 표현하고 redirect한다.
+3-3. 해당 id를 통해 상품을 찾고 console.log()에 표현하기 위해서는 동기적으로 작동해야 한다. => 콜백함수를 통해 해결한다.
+3-4. find 메서드는 배열 메서드이고 해당하는 배열 요소 하나를 찾으면 반환한다. 그 반환된 요소를 매개변수에 넣어준다.
 
 
 4. 제품 상세 보기 렌더링
-1. product-list.ejs에서 details 버튼을 누르면 a 태그로 인해 /products/number... url이 서버로 전송된다.
-2. 이 데이터는 router에 동적 매개변수를 받는 동적 세그먼트에 의해 받아자고 getProduct 함수가 실행된다.
-3. getProduct 함수는 동적 세그먼트에 의해 id가 인수로 들어가고 그 id로 find 메서드를 사용해서 일치하는 항목을 가져온다.
-4. 일치하는 항목만을 렌더링하는 page를 생성하고 반환한다.
+4-1. product-list.ejs에서 details 버튼을 누르면 a 태그로 인해 /products/number... url이 서버로 전송된다.
+4-2. 이 데이터는 router에 동적 매개변수를 받는 동적 세그먼트에 의해 받아자고 getProduct 함수가 실행된다.
+4-3. getProduct 함수는 동적 세그먼트에 의해 id가 인수로 들어가고 그 id로 find 메서드를 사용해서 일치하는 항목을 가져온다.
+4-4. 일치하는 항목만을 렌더링하는 page를 생성하고 반환한다.
+4-5. path키가 필요하다. include navigation에 active class의 여부를 가르기 떄문이다.
 
 
 5. Post 요청으로 데이터 전달하기
@@ -42,6 +58,10 @@ ejs의 include에 변수를 전달하고 싶다면 (include 1,2) 1은 어떤 파
 => form의 input를 통해 데이터를 가져오고 싶을 때 이미 정해진 데이터를 가져오고 싶다면?
   <input type="hidden" name = "productId" value = "productId">를 사용한다.
 
+5-1. details 페이지, product-list 페이지에서 add-to-cart를 통해 데이터를 전송하여 처리하는 로직이 필요하다.
+5-2. details 페이지는 ejs와 Node.js가 공유하는 데이터가 명확하기 때문에 include에 데이터를 내려줄 필요가 없다. 그러나 product-list 페이지는 for-loop를 통해 데이터를 동적으로 표현했기 때문에 include(1,2) 2의 인자에 객체형식으로 데이터를 줘야 한다.
+5-3. 해당 add-to-cart의 form은 post 요청을 하기 위해서 만들었고 input를 hidden으로 만들고 name과 value를 통해 details 상품에 일치하는 데이터가 보내진다.
+
 
 6. 장바구니 모델 추가하기
 장바구니의 로직은 이전의 cart에 추가한 것을 유지하고 현재 추가된 아이템을 cart에 추가하는 로직이 필요하다.
@@ -50,7 +70,20 @@ ejs의 include에 변수를 전달하고 싶다면 (include 1,2) 1은 어떤 파
 => 실행시점을 내가 정할 수 있다는 것이다.
 => 비동기 처리를 할 떄 매우 유용하다.
 
-6-1. fs.readFile를 통해 에러가 아니라면 JSON.parse를 통해 javaScript 객체형식으로 cart 변수에 담는다.
+6-1. details와 일치하는 상품을 가져오는 메서드를 실행하고 그 메서드의 결과를 매개변수로 하는 함수를 사용한다.
+6-2. id와 product.price를 매개변수로 하는 cart.addProduct()를 실행한다.
+
+Cart Model
+1. 매개변수로 id와 price가 존재한다.
+2. fs.readFile를 통해 파일의 존재 여부를 확인 후에 에러가 발생하지 않으면 cart 변수에 JSON.parse(..)를 통해  javaScript 객체를 넣는다. 그렇지 않다면 cart는 {product:[], totalPrice :0}으로 초기화한다.
+3. 매개변수 id를 통해 기존의 상품을 또 추가한지 확인한다. findIndex를 사용하여 existingProductIndex 변수명에 index를 담는다.
+4. cart.products[existingProductIndex]의 정보를 existingProduct에 담는다.
+5. 기존의 상품이 있고 없고에 따라 if를 사용하여 처리한다.
+6. 기존의 상품이 존재한다면 updatedProduct 변수에 {...existingProduct}를 사용하여 데이터를 넣는다.
+7. updatedProduct.qty = updatedProduct.qty + 1;/ quy라는 키를 설정하고 +1를 한다.
+8.  cart.products = [...cart.products]; => 재설정한다.
+9. cart.products[existingProductIndex] = updatedProduct; 이미 존재하는 인덱스에 데이터를 updatedProduct로 덮어씌운다.
+10. totalprice를 처리하고 해당 데이터 객체를 JSON 데이터 형식으로 바꿔서 파일을 작성한다.
 
 
 7. 쿼리 매개변수 사용
