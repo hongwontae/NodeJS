@@ -34,10 +34,23 @@ router('products/:productId',func)
 5. Post 요청으로 데이터 전달하기
 post 요청은 자동으로 입력 데이터가 본문에 포함된 요청을 준다. 그렇기 때문에 url에 무엇을 더할 필요가 없다.
 => 미들웨어로 받을 떄 req.body에 데이터가 존재한다.
-include에 변수를 전달하고 싶다면 include 1,2) 1은 어떤 파일이 들어가야 하는지 2는 어떤 데이터를 줄 지 객체 형식으로 건네준다. {product(key) : product(value)}
+ejs의 include에 변수를 전달하고 싶다면 (include 1,2) 1은 어떤 파일이 들어가야 하는지 2는 어떤 데이터를 줄 지 객체 형식으로 건네준다. {product(key) : product(value)}
+
+=> ejs for 루프를 통해서 데이터를 동적으로 표현했다. for loop의 데이터는 해당 ejs 파일에만 사용가능한 로컬 변수이다. 동적인 데이터를 include에 내려주고 싶다면?
+=> include('...address', {key:value})로 전달해주면 된다.
+
+=> form의 input를 통해 데이터를 가져오고 싶을 때 이미 정해진 데이터를 가져오고 싶다면?
+  <input type="hidden" name = "productId" value = "productId">를 사용한다.
 
 
 6. 장바구니 모델 추가하기
+장바구니의 로직은 이전의 cart에 추가한 것을 유지하고 현재 추가된 아이템을 cart에 추가하는 로직이 필요하다.
+
+*** 콜백함수의 요점
+=> 실행시점을 내가 정할 수 있다는 것이다.
+=> 비동기 처리를 할 떄 매우 유용하다.
+
+6-1. fs.readFile를 통해 에러가 아니라면 JSON.parse를 통해 javaScript 객체형식으로 cart 변수에 담는다.
 
 
 
