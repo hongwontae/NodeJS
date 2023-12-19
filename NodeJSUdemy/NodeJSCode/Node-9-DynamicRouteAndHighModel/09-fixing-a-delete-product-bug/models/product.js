@@ -33,11 +33,15 @@ module.exports = class Product {
       if (this.id) {
         const existingProductIndex = products.findIndex(
           prod => prod.id === this.id
+          // 일치하는 제품의 인덱스를 찾은 것이다.
         );
         const updatedProducts = [...products];
+        // Product의 정보들을 전부 updatedProducts 변수에 넣는 것 => 전개 연산자로서의 배열
         updatedProducts[existingProductIndex] = this;
+        // 기존의 정보를 업데이트한 정보로 바꾼다.
         fs.writeFile(p, JSON.stringify(updatedProducts), err => {
           console.log(err);
+          // 그리고 파일에 쓴다.
         });
       } else {
         this.id = Math.random().toString();
