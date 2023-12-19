@@ -64,7 +64,14 @@ admin product.ejs에서 edit 버튼를 눌러서 edit-product 뷰를 반환하�
 
 
 7. 장바구니 페이지에 장바구니 항목 표시하기
+7-1. /cart를 통해 get 요청이 오면 shopController.getCart가 호출된다.
+7-2. product 객체와 cart 객체의 id가 일치하는 제품을 가져온다. 
+=> 카트에 추가된 것은 제품에 존재하기 때문이다.
+7-3. 일치하는 제품에서 이름과 qty만 뽑아서 렌더링한다.
 
+
+8. 장바구니 항목 삭제
+cart-delete URL이 전송되면 deleteProduct CART 로직만 실행된다.
 
 
 
