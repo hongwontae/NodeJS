@@ -49,6 +49,7 @@ ex) const pool = mysql.createPool({
   database : 'node-complete',
   password : '1234'
 })
+(host, userName, dbName, password를 통해 올바른 데이터 베이스에 접근한다.)
 
 module.exports = pool.promise();
 => 비동기처리를 동기적으로 하기 위해서 
@@ -94,7 +95,7 @@ findById(id){
  return db.excute('select * from products where prodcuts.id = ?', [id]);
 }
 
-*** db.excute()문에서 ?는 []의 데이터를 참조한다.
+*** db.excute()문에서 ?는 두 번쨰 인자로 들어가는 []의 데이터를 참조한다. => sql injection를 방어하기 위해서
 *** db.excute()로 반환되는 데이터는의 형식은 [[{key:value, key:value}]] 형식이다.
 
 
