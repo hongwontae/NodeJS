@@ -110,7 +110,7 @@ key.value
 
 
 ** module.exports = value
-** module.exports.key = value
+** module.exports.key = value/ exports.key
 ** module.exports = {key : value, key : value}
 
 

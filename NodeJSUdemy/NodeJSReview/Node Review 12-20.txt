@@ -1,0 +1,135 @@
+1. 설정단계
+body-parser, path, express를 require 한다.
+
+body-parser는 post 요청 같은 것이 들어오면 자동으로 본문 분석를 해주는 패키지이다.
+app.use(bodyParser.urlencoded({extended:false}));
+
+static 파일을 link로 불러오는 ejs 파일을 위해서 정적 파일에 접근할 수 있도록 express.static를 사용한다.
+app.use(express.static(path.join(__dirname,'public')))
+=> 정적 파일에 접근할 떄는 public 폴더의 파일을 가져가라.
+
+app.set()를 통해 반환할 뷰와 반환할 뷰의 폴더를 지정한다.
+=> 그 전에 뷰 엔진으로 사용할 ejs를 npm install --save ejs를 통해 가져온다.
+app.set('view engine', 'ejs') => 뷰 엔진은 ejs이다.
+app.set('views', 'views') => 반환할 view는 views 폴더에 존재한다. 첫 번쨰 인자는 views라는 키일 뿐이다.
+
+
+2. Module 내보내기
+4가지 방법이 있다.
+module.exports = 변수, 상수, 클래스, 함수이름 => 하나만 내보내기 가능
+module.exports = {key:value, key:value}
+module.exports.key=..
+exports.key=...
+
+받을 떄는 require() 구문을 사용한다.
+
+
+3. npm
+npm init => NPM 프로세스를 사용하고 package.json를 파일이 생성된다.
+npm install => npm 패키지를 사용하겠다.
+npm install .. -g => 전역으로 설치
+npm insatll .. --save--dev 개발전용/ npm install .. --save => 개발+배포
+package.json은 라이브러리의 개발 버전 range, package-lock.json은 라이브러리의 정확한 버전 명시
+
+
+4. express.js
+express.js는 서버를 구성하는 프레임워크이다.
+처음 사용할 떄는 npm install --save express를 사용하여 가져오고
+const express = require('express')/ const app = express();
+=> express를 가져와서 그 함수를 실행시켜 변수에 놓고 사용한다.
+
+이제는 미들웨어 방식으로 url 요청을 받고 처리한다.
+
+app.listen(3000) => 서버를 계속 켜 둔다.
+
+
+5. router 사용하기
+const router = express.Router() => app.use express를 사용하는 것과 유사하다.
+이 router는 루트 파일에서 사용하고 파일 전체를 봐라봐야 하기 떄문에 module.exports = router를 한다.
+루트 파일에서 경로를 사용하지 않고 함수 포인터만 주면 위에서 처리되지 않은 모든 처리를 받는다.
+루트 폴더의 app.use나 router의 path 둘 다 옳아야 router의 func이  실행된다.
+
+
+6. path
+path.join()은 경로를 설정해주는 메서드이다. path.join(__dirname, 'views', 'fiel...')
+=> join은 운영체제에 맞는 경로 설정을 알아서 해주고 /나\가 아닌 ,로 구분한다.
+
+
+7. express.static()
+=> 정적 파일 시스템에 접근할 떄 => ejs에서 css파일 link를 통해 href에 접근할 떄 일반적으로는 불가능하다.
+=> 그러나 express.static(path..)를 사용하면 가능하다.
+
+
+8. ejs
+res.render를 통해 엔진에 등록된 뷰를 반환한다.
+res.render('파일 이름', {ejs에서 사용할 데이터})
+
+ejs내의 데이터 표현식 => <%= ... %>
+
+<%- include('path', {}) %>
+
+
+<%= if() { %>
+...
+<% } %>로 for이나 if를 사용할 수 있다.
+
+
+9. MVC 패턴
+Model => 데이터 처리
+Views => 화면
+Controller => 화면과 데이터 처리의 중간 단계
+
+
+10. fs module
+fs는 core module이고 파일를 읽고 쓸 수 있다.
+
+fs.readFile(path, (err,fileContent)=>{
+   console.log(err)
+})
+
+fs.writeFile(path, (err, filecontent)=>{
+   console.log(err)
+})
+
+
+10. 동적 매개변수
+url를 보내는 구문을 작성할 떄 <% product %>를 사용하고 url를 받는 구문에서 /:product 으로 받아 올 수 있다.
+data를 가져올 떄는 req.params.key를 통해 가져온다. router로 받을 떄 동적 매개변수는 다 흡수함으로 뒤에 놓여져 있어야 한다.
+
+
+11. post
+=> post 요청은 body-Parser에 의해 body에 존재한다.
+
+
+12. 콜백함수
+=> 함수의 호출 시점을 내가 정할 수 있다.
+
+
+13. 쿼리매개변수
+/?data=true를 통해 보내면 req.query.data로 받을 수 있다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
