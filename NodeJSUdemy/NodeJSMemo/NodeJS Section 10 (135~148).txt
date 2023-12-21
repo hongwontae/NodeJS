@@ -43,6 +43,9 @@ NoSQL은 수평 스케일링이 SQL보다 쉽다. => 연결 수가 적기 때문
 
 단일 연결이 아니라 커넥션 풀을 통해 실행할 쿼리가 있을 때마다 항상 활용하면 좋다.
 
+Connection Pool => 일정 수의 커넥션을 pool에 보관하여 사용자의 요청이 발생하면 연결을 해주고 연결 종료 시 Pool에 다시 반환하여 보관하는 것. 커낵션은 이미 db와 연결된 통로이다. http 요청이 오면 이 통로를 주고 커넥션 풀에 다시 반납한다. 커넥션 풀을 보관하는 장소는 메모리이다.
+
+
 ex) const pool = mysql.createPool({
   host : 'localhost',
   user : 'root',
@@ -97,6 +100,8 @@ findById(id){
 
 *** db.excute()문에서 ?는 두 번쨰 인자로 들어가는 []의 데이터를 참조한다. => sql injection를 방어하기 위해서
 *** db.excute()로 반환되는 데이터는의 형식은 [[{key:value, key:value}]] 형식이다.
+*** NodeJS SQL 구문에서 특정데이터를 규정할 떄는 테이블명.칼럼명으로 적어야 한다.
+*** select 문이나 update, insert문이나 return 되는 반환값은 항상 존재한다. (update문은 update된 메타 데이터가 반환된다.)
 
 
 

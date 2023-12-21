@@ -9,15 +9,10 @@ const app = express();
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname, 'public')))
 
-const shopRouter = require('./routers/shop')
-const errorRouter = require('./controllers/Error')
 
+const ShopRouter = require('./routers/shop')
 
-app.use('/shop',shopRouter);
-
-
-app.use(errorRouter.errorHandler)
-
+app.use('/shops',ShopRouter);
 
 
 app.listen(3000);
