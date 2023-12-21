@@ -17,12 +17,30 @@ sequelize는 class이다. new 연산자를 통해 객체를 생성한다.
 
 {dialect : 'mysql', host : 'localhost'} => dialect=> mysql 문법을 사용하겠다.
 
+=> 이렇게 구성되면 Sequelize 환경으로 구성된 커넥션 풀이 존재하는 것이다.
+
 
 3. 모델 정의
+Sequelize class와 sequelize 커넥션 풀을 가져오면 Sequelize가 관리할 모델을 정의할 수 있다.
+
+sequelize.define() 
+=> 새 모델을 정의한다. 첫 번쨰 인자는 모델 이름(소문자 규율), 두 번쨰 인자는 모델의 구조를 정의한다. 자동으로 생성할 데이터베이스 테이블을 정의한다. js 객체로 구성한다. 제품들이 가지는 속성이나 필드를 정의하면 된다.
+
+ex) {
+  id : {
+   type : Sequelize.INTEGER,
+   autoIncrement : true,
+    allowNull : false,
+    primaryKey : true
+}
+title : Sequelize.STRING
+}
+=> define의 두 번째 인자는 객체형식이고 필드를 구성하는 요소의 키값도 객체형식이다.
+=> autoIncrement, allowNull, primaryKey등을 구성할 수 있다.
+=> type은 Sequelize static 클래스의 프로퍼티로 가져와서 구성해야 한다.
 
 
-
-
+4. 데이터베이스에 JS 정의 동기화하기
 
 
 
