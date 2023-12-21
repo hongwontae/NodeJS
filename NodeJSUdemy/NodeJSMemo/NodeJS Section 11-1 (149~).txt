@@ -6,3 +6,55 @@ Object-Relational Mapping Library이다.
 => 객체를 명령하면 Sequelize가 백그라운드에서 sql 명령을 실행한다.
 
 Seque는 데이터베이스를 다루는 모델을 제공하고 모델을 정의한다.
+
+
+2. 데이터베이스에 연결
+Sequelize 설치 => npm install --save sequelize
+Sequelize는 MySQL2 패키지를 필요로 한다.
+
+sequelize는 class이다. new 연산자를 통해 객체를 생성한다.
+이 떄 인자의 값으로 db이름, username, password, {options}를 준다.
+
+{dialect : 'mysql', host : 'localhost'} => dialect=> mysql 문법을 사용하겠다.
+
+
+3. 모델 정의
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
