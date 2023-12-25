@@ -1,6 +1,10 @@
 1. Sequelize란?
 Object-Relational Mapping Library이다.
 백그라운드에서 실제로 SQL 코드를 처리하며 JS 객체로 맵핑해 SQL 코드를 실행하는 편리한 메서드를 재공하기 떄문에 SQL 코드를 직접 작성하지 않아도 된다.
+=> Sequelize로 db에 접근해서 js 객체 형태로 값을 반환한다.
+=> Sequelize로 JS 객체를 생성하면 테이블을 생성한다.
+=> 양방향
+=> Sequelize model 생성 => 해당 모델을 기반으로 한 객체를 생성 => 해당 객체 메서드를 사용하여 쿼리 사용 or 관계 설정
 
 객체가 Sequelize에 의해 DB에 매핑되면 테이블을 자동으로 생성한다. 테이블뿐만 아니라 관계까지 자동으로 설정한다.
 => 객체를 명령하면 Sequelize가 백그라운드에서 sql 명령을 실행한다.
@@ -12,7 +16,7 @@ Seque는 데이터베이스를 다루는 모델을 제공하고 모델을 정의
 Sequelize 설치 => npm install --save sequelize
 Sequelize는 MySQL2 패키지를 필요로 한다.
 
-sequelize는 class이다. new 연산자를 통해 객체를 생성한다.
+sequelize는 생성자 함수이다. new 연산자를 통해 객체를 생성한다.
 이 떄 인자의 값으로 db이름, username, password, {options}를 준다.
 
 {dialect : 'mysql', host : 'localhost'} => dialect=> mysql 문법을 사용하겠다.
@@ -38,6 +42,8 @@ title : Sequelize.STRING
 => define의 두 번째 인자는 객체형식이고 필드를 구성하는 요소의 키값도 객체형식이다.
 => autoIncrement, allowNull, primaryKey등을 구성할 수 있다.
 => type은 Sequelize static 클래스의 프로퍼티로 가져와서 구성해야 한다.
+
+=> sequelize를 통해 db 모델을 구성한다. 타입은 Sequelize class를 직접가져와서 규정한다.
 
 
 4. 데이터베이스에 JS 정의 동기화하기

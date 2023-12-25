@@ -3,3 +3,21 @@
 
 
 2. 일대다 관계 추가하기
+관계 설정 (Associations)
+=> 일대다, 일대일, 다대다 같은 관계설정을 존재한다. Sequelize를 통해 이 관계도 설정할 수 있다.
+
+루트 파일에 각 모델들을 불러와서 sequelize를 동기화하기 전에 관계를 정의하면 된다.
+
+Product.belongsTo(User, {constraints : true, onDelete : 'CASCADE'});
+=> Product는 User에 속한다. User 일 : Product 다
+User.hasMany(Product)
+=> User는 Product를 가지고 있다.
+
+=> 강제적으로 테이블을 재실행하고 싶다면 동기화하는 sequelize.sync({force : true})를 줘야한다.
+
+
+3. 더미 사용자 생성 및 관리하기
+미들웨어는 들어오는 요청에 대한 반응이다. => 루트 파일에서 실행되는 모델 관계 설정이나 동기화설정은 자동으로 이루어진다.
+
+데이터베이스에서 검색하는 사용자는 db에 있는 값을 포함하는 JS 객체가 아니다.
+
