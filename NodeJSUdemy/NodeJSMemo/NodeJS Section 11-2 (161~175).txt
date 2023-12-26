@@ -46,6 +46,28 @@ belongsTo 연관관계의 경우 새로운 관련 객체를 생성할 수 있는
 => 해당 메서드는 해당 User의 Products를 추가하는 메서드이다.
 
 
+5. 관련 상품 가져오기
+위처럼 관계 설정 메서드 req.user.getProducts({where : {id : prodId}}) => 해당 user의 id가 일치하는 products를 전부 가져와라. => 반환값은 무조건 배열이다.
+
+
+** 루트 파일에서 연관관계가 설정되었다면 추가되는 메서드가 존재한다. 
+
+
+6. 일대다 및 다대다 관계
+=> User.hasOne(Cart)/ Cart.belongsTo(User) => 유저는 하나의 카트를 가지고 있고 카트는 유저에 속한다.
+=> 이렇게 설정하면 Cart 테이블에 User id가 외래키로 설정된다.
+
+=> Cart.belongsToMany(Product, {through : CartItem})/ Product.belongsToMany(Cart, {through : CartItem});
+=> 카트는 여러개의 상품을 지닐 수 있고 상품을 여러개의 카트에 추가될 수 있다.
+=> 이렇게 설정하면 다대다 관계가 설정된다. 다대다 관계를 손쉽게 해결하기 위해 중간 테이블를 놓아서 외래키를 준다.
+=> {through : CartItem}를 설정해서 CartItem은 Cart와 Product의 외래키가 존재한다.
+
+
+7. 카트 생성 및 가져오기
+
+
+
+
 
 
 
