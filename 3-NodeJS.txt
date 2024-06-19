@@ -1,0 +1,48 @@
+1. 동적 세그먼트
+1-1. /:id, /:productId 와 같이 백엔드에서 요청 url을 받을 떄 뭐든지 받을 수 있게 만들 수 있다.
+1-2. req.params.productId를 통해 동적 매개변수를 얻을 수 있다. => 이 떄 /: id,productId와 같아야 한다.
+1-3. 동적 세그먼트는 위치가 중요하다. => 모든것을 빨아들이기 때문이다.
+
+
+2. __dirname
+=> 해당 루트 서버 파일의 위치를 설명한다.
+=> 전역 변수
+=> ex) app.js가 NodeServer 파일 안에 존재하면 NodeServer의 위치를 반환한다.
+
+
+3. 쿼리 매개변수
+3-1. http:localhost/service?edit=true&post=false
+3-2. ?로 시작하고 값=vaule로 설정하고 여러 개를 설정하려면 &로 구분한다.
+3-3. 받을 떄는 req.query.key/ req.query.key2로 받을 수 있다. => req.query로 받으면 {edit : 'true', delete : 'false'}로 받아진다.
+
+
+4. JSON으로 보낼 떄는 원시값으로 JSON.Stringify해서 보내면 안된다. => 배열이나 객체에 담아서 줘야한다.
+
+
+5. res.end() => res가 끝나면 취할 동작
+
+
+6. mysql과 Node 연동
+6-1. mysql2 require 처리
+6-2. const pool = mysql.createPool({}) => 설정처리
+6-3. module.exports = pool.promise() => 내보내기
+6-4. pool.excute() => 비동기 함수이다. promise로 처리가능
+
+6-5. get
+=> db.excute('select * from products').then((data)=>console.log(data));
+
+6-6. post
+=> db.excute(insert into (age, descr) values (?, ?)  [...])
+=> insert를 사용할 떄는 sql injection을 막기 위해서 values (?, ?...)로 채워놓고 배열을 통해 값을 추가한다.
+
+6-7. get / where
+=> db.excute('select * from product where product.id = ?', [id])
+=> update도 마찬가지로 sql injection을 막기위해 배열을 사용한다.
+
+
+
+
+
+
+
+
