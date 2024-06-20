@@ -1,3 +1,4 @@
+import FindByPk from "./components/FindByPk";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import ShowData from "./components/ShowData";
@@ -9,6 +10,7 @@ function App() {
         <Header></Header>
         <Main></Main>
         <ShowData></ShowData>
+        <FindByPk></FindByPk>
       </div>
     </>
   );

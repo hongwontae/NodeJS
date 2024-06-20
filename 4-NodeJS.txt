@@ -1,0 +1,60 @@
+1. sequelize (Object-Relational Mapping Library)
+1-1. 백그라운드에서 SQL 코드를 처리하고 JS 객체로 매핑해 SQL 코드를 실행하는 메서드를 제공한다.
+=> SQL문을 안 써도 된다.
+
+1-2. 어떤 객체가 Squelize에 의해 매핑되면 테이블을 자동으로 생성하고 관계도 자동으로 만들어진다.
+
+
+2. 설정
+2-1. require를 통해 sequelize를 가져온다.
+2-2. 가져온 sequelize를 new를 통해 생성자 정의를 한다. ('database', 'userName', 'password', {...});
+
+
+3. Model 설정(Table 설정)
+3-1. sequelize와 설정된 sequelize를 가져온다.
+3-2. 설정에서 사용한 sequelize.define을 통해 테이블 이름과 칼럼을 정의한다.
+3-3. 칼럼을 정의할 떄 (칼럼 이름 : {type : 기존의 Sequelize.Integer, allowNull : false, autoIncrement : true..}) 작업가능
+
+
+4. sequelize.sync()
+4-1. 모델을 DB로 동기화해 해당하는 테이블 생성, 관계 생성이다. 이미 생성된 모델의 DB를 재생성하지 않는다.
+4-2. 비동기 작업이고 Promise를 지원한다.
+4-3. 근데 안된다. => 직접 Model을 불러와서 sync하니까 성공했다.
+
+
+5. create VS build
+
+1. create
+=> 인스턴스를 생성하고 곧바로 save 메서드를 호출해서 DB에 저장한다.
+=> 데이터를 바로 저장할 떄 사용하는 메서드
+=> Promise를 반환한다. => 비동기 메서드
+
+2. build
+=> 인스턴스를 생성하고 save를 호출하지 않는다.
+=> 인스턴스된 데이터를 가공후 저장할 떄 사용한다.
+
+
+6. Sequelize 인스턴스
+=> JS 객체를 DB와 상호작용하기 위해 변경된 데이터
+=> save나 destory, update를 통해 조작가능
+
+
+7. findByPk
+=> 기본키에 해당하는 데이터를 넘겨준다.
+
+
+8.findAll()
+=> 테이블에 모든 데이터를 넘겨준다.
+=> 객체를 인자로 받아서 where 조건을 처리할 수 있다.
+=> where 조건을 사용하면 알맞은 쿼리를 만들어내서 DB에 쿼리문을 전송하여 데이터를 가져온다.
+
+
+
+(findById는 사라진 메서드이다.)
+
+
+/// 망상
+=> http:// //를 적어주지 않으면
+=> VM1618:1 Uncaught (in promise) SyntaxError: Unexpected token '<', "<!doctype "... is not valid JSON
+=> 에러 발생ㄴ
+

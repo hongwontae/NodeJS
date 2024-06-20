@@ -16,7 +16,7 @@ function ShowData() {
     <>
       {data &&
         data.map((ele) => {
-          return <div key={ele.id}>{ele.descr}</div>;
+          return <div key={ele.id}>{ele.title} {ele.description}</div>;
         })}
     </>
   );

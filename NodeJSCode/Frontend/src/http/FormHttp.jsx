@@ -28,12 +28,26 @@ export async function sendPostHttp(data){
 }
 
 export async function showDataHttp(){
-    const response = await fetch('http://localhost:3000/show');
+    const response = await fetch('http://localhost:3000/show/all');
 
     if(!response.ok){
         throw new Error('Error Message');
     }
 
     const data = await response.json();
+    console.log(data)
+    return data;
+}
+
+export async function showDataOne(num){
+    const url = `http://localhost:3000/show/findOne?data=${num}`
+    const response = await fetch(url)
+
+    if(!response.ok){
+        throw new Error('Error Occurred!');
+    }
+
+    const data = await response.json();
+    console.log(data)
     return data;
 }

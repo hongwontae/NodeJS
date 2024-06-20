@@ -15,6 +15,8 @@
 3-2. ?로 시작하고 값=vaule로 설정하고 여러 개를 설정하려면 &로 구분한다.
 3-3. 받을 떄는 req.query.key/ req.query.key2로 받을 수 있다. => req.query로 받으면 {edit : 'true', delete : 'false'}로 받아진다.
 
+=> 동적 세그먼트는 params로 쿼리 매개변수는 query로 받아야 한다.
+
 
 4. JSON으로 보낼 떄는 원시값으로 JSON.Stringify해서 보내면 안된다. => 배열이나 객체에 담아서 줘야한다.
 
