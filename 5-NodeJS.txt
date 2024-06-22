@@ -1,0 +1,28 @@
+1. Update
+1-1. update를 위해서 post 요청으로 받은 id를 받아서 findByPk를 통해 데이터를 얻는다.
+1-2. 해당 데이터를 그대로 내보낼 수 있지만 객체 형식의 db 데이터와 각종 메서드가 존재한다.
+1-2. db에서 가져온 데이터를 post 요청으로 가져온 데이터로 바꾸고 save를 호출하면 된다.
+
+
+2. delete
+2-1. destroy 메서드를 통해서 데이터를 삭제할 수 있다.
+2-2. 해당 Model 변수를 통해서 destroy를 호출하고 where 조건을 넣는 방법
+2-3. findByPk를 통해서 삭제할 데이터를 찾은 후 then에서 해당 데이터에서 destroy를 호출하는 방법
+2-4. 삭제한 delete의 return 값은 기존의 데이터가 담겨져 있다. => 이를 front 쪽으로 보낼 수 있다.
+
+
+3. Associations
+3-1. 일대일, 일대다, 대다대 관계를 sequelize에서 설정 가능
+3-2. Products.belongsTo(User, {}) => 상품은 유저에 속한다. => 유자 하나에 상품 여러개인 일대다
+3-3. 관계를 설정하면 두 번쨰 인자로 관계를 정의할 수 있다.
+3-4. {Constraint : true, onDelete : 'CASCADE'} => 유저를 삭제하면 유저에 속한 모든 상품 삭제
+3-5. User.hasMany(Products) => 유저가 상품을 가진다. => 상품 여러개에 유저 하나
+
+
+4. 관계 설정을 완료되면 해당 seq 객체들에게 새로운 메서드가 추가된다.
+4-1. User는 prodcut를 추가할 수 있는 메서드를 얻는다. ex) createProduct처럼 create 뒤에 다 쪽이 붙는다.
+=> 이렇게 되면 product는 외래키로 userId를 자동으로 입력된다.
+4-2. user.getProduct => 유저의 상품을 배열 형태로 반환한다. => {where : {id : prodId}}처럼 where 조건 사용가능
+
+
+5. 

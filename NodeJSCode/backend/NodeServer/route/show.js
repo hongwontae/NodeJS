@@ -13,11 +13,7 @@ router.get('/findOne', (req, res, next)=>{
 })
 
 router.get('/all', async (req, res, next)=>{
-    Products.findAll({where : {
-        price :{
-            [Sequelize.Op.gt] : 0
-        }
-    }}).then(result => {
+    Products.findAll().then(result => {
         res.json(result)
     }).catch(err => {
         console.log(err)
