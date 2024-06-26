@@ -2,7 +2,7 @@ const Sqeuelize = require('sequelize');
 
 const sequelize = new Sqeuelize('node-complete', 'root', 'YourRootPassword', {
     dialect : 'mysql',
-    host : 'localhost'
+    host : 'localhost',
 });
 
 module.exports = sequelize;

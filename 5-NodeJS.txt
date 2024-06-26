@@ -25,4 +25,3 @@
 4-2. user.getProduct => 유저의 상품을 배열 형태로 반환한다. => {where : {id : prodId}}처럼 where 조건 사용가능
 
 
-5. 

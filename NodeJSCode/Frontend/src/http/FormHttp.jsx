@@ -1,5 +1,7 @@
 export async function showDataHttp(){
-    const response = await fetch('http://localhost:3000/show/all');
+    const response = await fetch('http://localhost:3000/show/all', {
+        credentials : 'include'
+    });
 
     if(!response.ok){
         throw new Error('Error Message');
@@ -9,24 +11,27 @@ export async function showDataHttp(){
     return data;
 }
 
-
-export async function updateHttp(id){
-    const response = await fetch('http://localhost:3000/service/update',{
+export async function postDataHttp(data){
+    const response = await fetch('http://localhost:3000/service/register', {
         method : 'POST',
         headers : {
             'Content-Type' : 'application/json'
         },
-        body : JSON.stringify({id})
-    })
-    const resData = await response.json();
-    return resData
+        body : JSON.stringify(data),
+        credentials : 'include'
+    }); 
+
+    if(!response.ok){
+        throw new Error('Error Message')
+    }
+    console.log(await response.json());
 }
 
-export async function deleteHttp(id){
-    const url = `http://localhost:3000/service/delete?dele=${id}`
-    const response = await fetch(url, {
-        method : 'DELETE'
-    })
-    const resData = await response.json();
-    console.log(resData)
+export async function getCookie(){
+    const response = await fetch('http://localhost:3000/show/coo', {
+        credentials : 'include'
+    });
+    const cookieData = await response.json();
+    console.log(cookieData);
 }
+

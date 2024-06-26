@@ -1,4 +1,11 @@
+import {getCookie} from '../http/FormHttp'
 function Header() {
+
+
+  async function cookieGet(){
+    await getCookie();
+  }
+
   return (
     <>
       <header>
@@ -9,6 +16,7 @@ function Header() {
           iste eveniet consectetur aliquid facilis laborum nemo, unde odio
           accusamus voluptatem?
         </p>
+        <button onClick={cookieGet}>Cookies!</button>
       </header>
     </>
   );

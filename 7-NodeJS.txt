@@ -1,0 +1,93 @@
+1. 세션
+1-1. 사용자와 서버 간의 상태 정보를 유지하기 위한 기술이다. (쿠키와 비슷하다.)
+1-2. 세션은 서버에서 고유한 세션 ID를 생성하고 이를 쿠키에 저장하여 클라이언트에 전송한다. 이후 요청에서 클라이언트는
+세션 ID를 포함한다. => 해당 세션 ID를 통해 백엔드에서 저장되어 있는 세션 데이터를 식별 할 수 있다.
+1-3. 세션은 데이터를 DB, 메모리, 파일 시스템의 backend에서 저장한다.
+
+
+2. express-session
+2-1. nodeJS에서 session을 다루는 패키지
+
+const session = require('express-session')
+2-2. app.use(sesstion({
+    secret : '',
+    resave : false,
+    saveUninitialized : false
+}));
+
+2-3. 2-2 미들웨어 요청을 받으면 req.session을 초기화한다.
+2-4. 세션 데이터가 설정되기 전까지는 세션 ID가 생성되지 않는다.
+2-5. saveUninitialized => 초기화된 세션이 세션 데이터가 설정될 때까지 세션 ID가 생성되지 않는다.
+
+
+3. req.session.key = value를 설정하면 세션 ID가 생성되고 클라이언트에 저장된다.
+
+
+4. 3 이후에 세션 ID가 저장된 쿠키가 오면 app.use(session({}))가 세션 ID 쿠키를 읽고 해당 세션 ID에 매핑된 세션 데이터를 로드한다.
+=> 이런 과정 후에 req.session.key를 통해서 데이터를 받을 수 있다.
+
+
+5. 쿠키와 세션의 차이점
+
+5-1. 데이터 저장위치
+쿠키 => 클라이언트/ 세션 => 백엔드
+
+5-2. 보안
+쿠키 => 클라이언트에 저장되서 XSS 공격 취약
+세션 => 세션 데이터 자체는 서버에 존재, 세션 ID 쿠키로 통신하기 때문에 비교적 안전
+
+5-3. 수명
+쿠키 => expires/max-age에 따라 유지
+세션 => 일반적으로 브라우저를 닫으면 삭제된다. 다만 설정에서 expires, max-age를 넣으면 지속적으로 유지될 수 있다.
+
+
+6. session과 DB 연동 (조금 어려움)
+6-1. Session 모델을 정의한다.
+=> 이 과정에서 req.session.key = {key : value}를 만나면 DB에 저장된다.
+=> sid, expires, data라는 칼럼으로 정의된다.
+=> data에 key = {key : value}가 string 형식으로 전부 저장된다.
+
+
+6-2. sessionStore라는 생성자 객체를 만들어야 한다.
+1. connect-session-sequelize 패키지 install
+2. express-session install
+3. 두 개의 패키지 require
+
+4. const session = require('express-session');
+5. const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+
+6-3. 세션 스토어 설정
+const sessionStore = new SequelizeStore({
+    db : 기존에 sequelize 설정 객체,
+    table : model에서 정의한 session의 첫 번쨰 인자 값,
+    checkExpirationInterval : 몇 분 마다 만료된 세션을 검사하여 삭제할 것인가?,
+    expiration : 만료시간
+})
+
+
+6-4. app.use(session({
+    ...나머지는 같다.
+    store : sessionStore => 이것만 추가
+}))
+
+
+6-5. sessionStore.sync();
+=> 일단 다른 app.use를 정의하기 전에 호출해주어야 한다.
+=> 먼저 호출을 해줘야 sequelize가 해당 테이블이나 각종 로직을 설정해주는 것 같다.
+
+
+6-6. req.session.key = {key : value}로 데이터 저장가능
+=> 근데 객체 형식이 아니어도 된다. 마음대로 저장가능
+=> req.session.key = value를 하면 데이터가 DB에 저장된다.
+
+
+6-7. 이후에 backend에서 session을 얻으려면 req.session에 접근하면 된다.
+=> cookie 설정하고 내가 저장한 key = {key : value}가 DB에서 튀어나온다.
+=> 이는 세션 미들웨어가 세션 ID를 확인하고 해당 세션 ID에 해당하는 세션 데이터를 DB에서 로드해서 req.session에 저장한다.
+
+
+
+
+
+

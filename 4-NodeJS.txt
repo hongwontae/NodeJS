@@ -13,7 +13,10 @@
 3. Model 설정(Table 설정)
 3-1. sequelize와 설정된 sequelize를 가져온다.
 3-2. 설정에서 사용한 sequelize.define을 통해 테이블 이름과 칼럼을 정의한다.
-3-3. 칼럼을 정의할 떄 (칼럼 이름 : {type : 기존의 Sequelize.Integer, allowNull : false, autoIncrement : true..}) 작업가능
+3-3. define(모델 이름, {칼럼 정의}, {그 외 설정 정의})
+=> 모델 이름을 정의하고 세 번째 인자에서 tableName을 정의하지 않으면 모델 이름으로 정의된다.
+
+3-4. 칼럼을 정의할 떄 (칼럼 이름 : {type : 기존의 Sequelize.Integer, allowNull : false, autoIncrement : true..}) 작업가능
 
 
 4. sequelize.sync()
