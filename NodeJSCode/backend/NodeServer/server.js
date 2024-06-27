@@ -8,6 +8,7 @@ const session = require("express-session");
 const sequelize = require("./util/databaseSetting");
 const serviceRoute = require("./route/service");
 const showRoute = require("./route/show");
+const authRoute = require('./route/auth')
 const sessionStore = require("./util/sessionStore");
 
 const app = express();
@@ -17,7 +18,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
 
-sessionStore.sync();
+
 
 app.use(
   session({
@@ -26,14 +27,17 @@ app.use(
     saveUninitialized: false,
     store: sessionStore,
     cookie : {
-      maxAge : 100000,
+      maxAge : 10000000,
       httpOnly : true
     }
   })
 );
 
+
+
 app.use("/service", serviceRoute);
-app.use("/show", showRoute);
+app.use("/show",  showRoute);
+app.use('/auth',authRoute)
 
 sequelize
   .sync()

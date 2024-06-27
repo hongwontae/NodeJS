@@ -1,34 +1,36 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
-import {showDataHttp} from '../http/FormHttp'
+import { showDataHttp } from "../http/FormHttp";
 
-function Main({re}){
+function Main({ re }) {
+  const [data, setData] = useState([]);
 
-    const [data, setData] = useState([])
-
-    useEffect(()=>{
-        async function getData(){
-            const data = await showDataHttp();
-            setData(data)
-        }
-        getData();
-    }, [re])
+  useEffect(() => {
+    async function getData() {
+      const data = await showDataHttp();
+      setData(data);
+    }
+    getData();
+  }, [re]);
 
 
-    return(
-        <>
-            <main>
-                <div>This Page GOOD</div>
-                {data && data.map((ele)=>{
-                    return <React.Fragment key={ele.id}>
-                        <li>
-                            {ele.title}
-                        </li>
-                    </React.Fragment>
-                })}
-            </main>
-        </>
-    )
+  return (
+    <>
+      <main className="text-center">
+        <div>This Page GOOD</div>
+        <ul className="flex justify-center gap-4">
+          {data &&
+            data.map((ele) => {
+              return (
+                <React.Fragment key={ele.id}>
+                  <li>{ele.title}</li>
+                </React.Fragment>
+              );
+            })}
+        </ul>
+      </main>
+    </>
+  );
 }
 
 export default Main;

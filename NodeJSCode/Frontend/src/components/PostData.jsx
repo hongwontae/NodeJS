@@ -16,7 +16,7 @@ function PostData({ setRe }) {
       price: formData.get("price"),
       description: formData.get("description"),
     };
-    await postDataHttp(formDataObj);
+    await postDataHttp({formDataObj});
 
     titleRef.current.value = ''
 
@@ -27,7 +27,7 @@ function PostData({ setRe }) {
 
   return (
     <>
-      <form onSubmit={postData}>
+      <form onSubmit={postData} className="text-center">
         <label htmlFor="title">Title</label>
         <input id="title" type="text" name="title" ref={titleRef}></input>
 
