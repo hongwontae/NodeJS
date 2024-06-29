@@ -27,7 +27,7 @@ function PostData({ setRe }) {
 
   return (
     <>
-      <form onSubmit={postData} className="text-center">
+      <form onSubmit={postData} className="flex justify-center items-center gap-4">
         <label htmlFor="title">Title</label>
         <input id="title" type="text" name="title" ref={titleRef}></input>
 

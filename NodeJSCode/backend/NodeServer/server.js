@@ -40,7 +40,7 @@ app.use("/show",  showRoute);
 app.use('/auth',authRoute)
 
 sequelize
-  .sync()
+  .sync({force : true})
   .then((result) => {
     app.listen(3000);
   })

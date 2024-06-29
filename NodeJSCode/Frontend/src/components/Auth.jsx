@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { signUpPostHttp, loginPostHttp } from "../http/FormHttp";
+import { signUpPostHttp, loginPostHttp, resetPasswordHttp } from "../http/FormHttp";
 
 function Auth() {
   const emailRef = useRef(null);
@@ -23,10 +23,22 @@ function Auth() {
     console.log("loginHandler");
     const dataObj = {
       email: emailRef.current.value,
-      password: passwordRef.current.value,
     };
     await loginPostHttp(dataObj);
     console.log("통신이 성공했습니다.");
+
+    emailRef.current.value = "";
+    passwordRef.current.value = "";
+  }
+
+  async function resetHandler(){
+    const dataObj = {
+      email : emailRef.current.value,
+      password : passwordRef.current.value
+    }
+    const data = await resetPasswordHttp(dataObj);
+
+    console.log(data);
 
     emailRef.current.value = "";
     passwordRef.current.value = "";
@@ -53,6 +65,7 @@ function Auth() {
           <button type="button" onClick={loginHandler}>
             Log-In
           </button>
+          <button type="button" onClick={resetHandler}>Password-Reset</button>
         </div>
       </form>
     </>

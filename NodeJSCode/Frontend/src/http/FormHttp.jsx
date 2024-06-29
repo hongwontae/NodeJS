@@ -78,3 +78,21 @@ export async function loginPostHttp(data) {
   console.log(resData);
 
 }
+
+export async function resetPasswordHttp(data){
+  const response = await fetch('http://localhost:3000/auth/reset', {
+    method : 'POST',
+    headers : {
+      'Content-Type' : 'application/json'
+    },
+    body : JSON.stringify(data)
+  })
+
+  if(!response.ok){
+    throw new Error('Reset Erro')
+  }
+
+  const resData = await response.json();
+  return resData;
+
+}
