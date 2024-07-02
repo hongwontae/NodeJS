@@ -1,7 +1,7 @@
 1. crypto
 1-1. NodeJs에 내장된 암호화 라이브러리이다.
 
-1-2. Buffet 객체란?
+1-2. Buffer 객체란?
 => 바이너리 데이터를 다루기 위한 객체이다.
 => 파일 시스템, 네트워크, 암호화 등의 작업에서 사용된다.
 => crypto.randomBytes(바이트수, callback) 랜덤한 2 진수 바이트 변수를 생성한다.
@@ -28,5 +28,41 @@
 2-3. findOne으로 찾은 다음 칼럼에 값을 넣는 것은 동기적으로 처리된다. (단순히 객체의 속성을 변경하기 때문)
 
 
-3. 
+3. sequelize 조건
+3-1. 여러 조건을 나열하면 and 조건으로 자동으로 인식한다. ([Op.and]로 명시적으로 사용가능)
+3-2. where : {
+    [Op.or] : [
+        {name : 'HWT'},
+        {age : 20}
+    ]
+} => [Sequelize.Op.or]를 사용해서 or 조건
+
+3-3. Like where : {
+    email : {
+        [Op.like] : '%@gmail.com'
+    }
+} => [Op.like]로 like 방식으로 찾기 가능
+
+3-4. [Op.between] => 사이 값 찾기 가능
+
+3-5. [Op.in] => 여러 값 중에 일치하는 값 찾기 가능
+
+3-6. [Op.not] => not 연산자
+
+3-7. Op.eq => 같다/ Op.ne => not equal/ Op.gt => 보다 크다/ Op.gte => 크거나 같다.
+Op.lt => 보다 작다/ Op.lte => 작거나 같다.
+
+
+4. 비밀번호 재설정 로직
+4-1. req.body의 이메일과 password와 DB의 email과 password를 비교하여 옳은 것을 찾아낸다.
+4-2. user가 존재한다면 crypto를 통해 16진수 무작위 변수를 생성하여 user의 table에 resetToken으로 저장하고 return하거나 이메일
+로 전송한다
+4-3. 그리고 다른 페이지에서 resetToken을 파악하여 일치한다면 password.bcrypto를 통해 비밀번호를 재생성한다.
+4-4. DB에 저장하고 다시 로그인 유도하는 로직을 구성한다.
+
+
+5. 권한 부여
+=> 로그인된 사용자가 ADMIN과 같은 권한을 가지면 안된다.
+=> 어떤 User인지에 따라 접근할 수 있는 리소스를 제한해야 한다.
+
 

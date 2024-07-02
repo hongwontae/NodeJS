@@ -4,6 +4,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const {body, validationResult, check } = require("express-validator");
 
 const sequelize = require("./util/databaseSetting");
 const serviceRoute = require("./route/service");
@@ -23,24 +24,27 @@ app.use(cookieParser());
 app.use(
   session({
     secret: "SECRET-KEY-2017-Q2TLXM1234@",
-    resave: false,
+    resave: true,
     saveUninitialized: false,
     store: sessionStore,
     cookie : {
-      maxAge : 10000000,
-      httpOnly : true
+      maxAge : Date.now() + 1000000,
+      httpOnly : false
     }
   })
 );
 
-
+const checkUser = (req, res, next)=>{
+  body('email').isEmail().withMessage('Error가 발생했습니다.');
+  next();
+}
 
 app.use("/service", serviceRoute);
 app.use("/show",  showRoute);
-app.use('/auth',authRoute)
+app.use('/auth', checkUser, authRoute)
 
 sequelize
-  .sync({force : true})
+  .sync()
   .then((result) => {
     app.listen(3000);
   })
