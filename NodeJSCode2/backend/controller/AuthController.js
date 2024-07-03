@@ -1,19 +1,11 @@
-const {validationResult} = require('express-validator')
+const {validationResult} = require('express-validator');
 
-const promiseFunc = ()=>{
-    return new Promise((resolve, reject)=>{
-        return resolve('hello')
-    })
-}
 
 exports.postValidation = (req, res, next)=>{
+    
 
-    // promiseFunc().then(result => {
-    //     console.log('??')
-    //     throw new Error('Error 발생했읍니다.')
-    // }).catch(err => {
-    //     next(err)
-    // })
+    console.log(req.fileData)
+    console.log(req.body.email, req.body.password)
 
     const errors = validationResult(req);
     console.log(errors.array().map(ele => {
