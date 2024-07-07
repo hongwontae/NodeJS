@@ -9,15 +9,15 @@ const storage = multer.diskStorage({
     cb(null, "uploads/"); 
   },
   filename: (req, file, cb) => {
-    cb(null, Math.random().toFixed(4) + file.originalname); 
+    cb(null,file.originalname); 
   },
 });
 
 const fileFilter = (req, file, cb)=>{
   if(file.mimetype === 'image/png' || file.minetype === 'image/jpg' || file.mimetype === 'image/jpeg'){
-    cb(new Error('Hello'), false)
+    cb(null, true)
   } else {
-    cb(null, false)
+    cb(new Error('Hello'), false)
   }
 }
 
@@ -57,5 +57,8 @@ router.post(
 
   authCon.postValidation
 );
+
+router.get('/get', authCon.getShow)
+router.get('/order-Accounting', authCon.getPDF)
 
 module.exports = router;

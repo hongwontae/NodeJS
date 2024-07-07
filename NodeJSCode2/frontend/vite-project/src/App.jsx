@@ -2,6 +2,7 @@
 import { useRef, useState } from "react";
 import "./App.css";
 import { dataHttp } from "./http/FormHttp";
+import Main from './components/Main'
 
 function App() {
   const emailRef = useRef(null);
@@ -52,6 +53,7 @@ function App() {
             유효성 검사
           </button>
         </form>
+        <Main></Main>
       </div>
     </>
   );
