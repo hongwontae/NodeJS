@@ -72,5 +72,18 @@ Content-Type : (application/json, x-www-form-urlencoded, mutipart/form-data, tex
 => 사전 요청일 떄 Access-Control-Allow-Origin과 Access-Control-Allow-Headers는 꼭 포함시켜야 응답을 반환한다.
 
 
+7. image 처리
+7-1. multe에 storage와 filter을 넣고 미들웨어를 생성하면 multipart-form/data로 오는 파일을 받을 수 있다.
+7-2. 이 떄 single, array 뭐든 간에 파일 객체로 받으려면 인자에 클라이언트에서 오는 파일 fieldName을 넣어줘야 한다.
+7-3. input type="file" 일 떄 http 통신 이후에 field을 비우려면 ref 연결후 빈 문자열을 할당해야 한다.
+
+
+8. loader
+Unexpected Application Error!
+You defined a loader for route "2" but didn't return anything from your `loader` function. Please return a value or `null`.
+=> loader는 반드시 값을 반환해야 하는데 아무것도 반환하지 않았을 떄 나오는 에러
+
+
+
 
 

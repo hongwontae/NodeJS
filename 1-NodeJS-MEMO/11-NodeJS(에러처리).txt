@@ -31,3 +31,6 @@
 
 5-6. 서버에서 res.json()을 보낼 떄 기본값은 200이다.
 
+
+6. try-catch의 throw와 next(...), if문의 throw, promise의 catch의 next(...) => 에러 처리 미들웨어가 처리해준다.
+

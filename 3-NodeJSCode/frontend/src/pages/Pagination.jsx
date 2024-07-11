@@ -5,7 +5,7 @@ function Pagination({ totalPages, currentPages, setCurrentPage }) {
 
   for (let i = 1; i <= totalPages; i++) {
     pages.push(i);
-  }
+  } 
 
   return <>
     <ul className="flex flex-row gap-4">
