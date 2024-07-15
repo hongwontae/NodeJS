@@ -32,5 +32,11 @@
 5-6. 서버에서 res.json()을 보낼 떄 기본값은 200이다.
 
 
-6. try-catch의 throw와 next(...), if문의 throw, promise의 catch의 next(...) => 에러 처리 미들웨어가 처리해준다.
+6. 에러 처리 미들웨어가 트리거 되는 경우의 수
+6-1. 라우트에서 next(err)
+6-2. try-catch에서 throw를 던지고 catch에서 next(err)을 받는 경우 or catch에서 throw만 던져도 된다.
+6-3. Promise에서 reject된 경우 catch에서 next(err)
+6-4. 일반 미들웨어에서 next(err);
+
+=> throw가 처리되면 try-catch나 Promise().catch()에서 next(err)처리를 해줘야 한다.
 

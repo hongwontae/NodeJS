@@ -1,0 +1,8 @@
+1. 일대다
+1-1. Model에서 define이 호출되어서 table 구조를 잡는다.
+1-2. 하나 쪽의 테이블에 hasMany를 호출하여 구조를 잡는다.
+
+
+2. Sequelize where
+2-1. 조건을 사용할 떄는 where를 첫 번쨰로 다뤄야 한다.
+=> SQL문과 똑같다. SQL의 해석은 where부터이다.
