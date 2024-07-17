@@ -1,38 +1,37 @@
-// 서버 측 (Node.js)
 const express = require('express');
-const http = require('http');
-const socketIo = require('socket.io');
+const bodyParser = require('body-parser');
+const path = require('path')
+const sequelize = require('./util/DB')
+const User = require('./models/user')
+const Post = require('./models/post')
+
+const AuthRoute = require('./route/AuthRoute')
+const PostRoute = require('./route/PostRoute')
+const ShowRoute = require('./route/ShowRoute')
 
 const app = express();
-const server = http.createServer(app);
-const io = socketIo(server, {
-    cors : {
-        origin : '*'
-    }
+
+app.use(bodyParser.json());
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
+app.use((req, res, next)=>{
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE'); 
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
 });
 
-io.on('connection', (socket) => {
-    console.log('A client connected');
-    
+app.use('/auth', AuthRoute)
+app.use('/create', PostRoute)
+app.use('/show', ShowRoute)
 
-    // 클라이언트로부터의 메시지 수신
-    socket.on('sendMessage', (message) => {
-        console.log('Message received:', message);
 
-        // 클라이언트에게 응답 보내기
-        socket.emit('newMessage', );
-    });
+app.use((errors, req, res, next)=>{
+    console.log(errors)
+    return res.json({message : 'Error 미들웨어', errorData : errors, errorMessage : errors.message})
+})
 
-    socket.on('rrr', ()=>{
-        io.emit('rrr', 'email')
-    })
 
-    socket.on('disconnect', () => {
-        console.log('A client disconnected');
-    });
-});
-
-const port = 4000;
-server.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
+sequelize.sync().then(()=>{
+    app.listen(4000);
+})

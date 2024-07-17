@@ -1,25 +1,21 @@
 /* eslint-disable react/prop-types */
-
-import { useMemo } from "react";
-
 /* eslint-disable no-unused-vars */
-function Pagination({ onChnagePage, curPage, totalBtn }) {
-  const totalBtnCal = useMemo(() => {
-    let arr = Array.from({ length: +totalBtn }, (_, index) => index + 1);
-    return arr;
-  }, [totalBtn]);
+function Pagination({ totalPages, currentPages, setCurrentPage }) {
+  const pages = [];
 
-  const btn = totalBtnCal;
+  for (let i = 1; i <= totalPages; i++) {
+    pages.push(i);
+  } 
 
-  return (
-    <>
-      <div className="flex justify-center gap-4">
-        {btn.map((ele) => {
-          return <button onClick={()=>onChnagePage(ele)} className="border-[1px] p-1" key={ele}>{ele}</button>;
-        })}
-      </div>
-    </>
-  );
+  return <>
+    <ul className="flex flex-row gap-4">
+      {pages.map(ele => {
+        return <li key={ele} >
+          <button onClick={()=>setCurrentPage(ele)}>{ele}</button>
+        </li>
+      })}
+    </ul>
+  </>;
 }
 
 export default Pagination;
