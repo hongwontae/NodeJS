@@ -17,5 +17,38 @@
 
 
 4. Update
+4-1. findById나 다른 find 메서드를 통해 업데이트 대상 문서를 찾는다.
+4-2. 이 후 theh의 인자를 수정하고 save()를 호출하면 된다.
+
+
+5. findByIdAndDelete
+5-1. 삭제하길 원하는 데이터를 id를 통해서 찾는다.
+5-2. Promise를 반환한다. 
+
+
+6. ref
+6-1. 스키마에서 다른 모델을 참조하기 위해 사용한다.
+6-2. 어떤 문서의 필드가 특정 모델의 id을 참조하도록 설정한다.
+=> author : {type : ObjectId, ref : 'User'} => author는 User의 모델의 ObjectId을 참조한다. => NoSQL 관계 설정
+
+
+7.popluate
+7-1. 참조된 필드를 실제 문서로 채워준다.
+7-2. 참조된 ObjectId를 실제 문서로 바꿔준다.
+7-3. populate가 실제로 실행되기 위해서는 exec() 메서드나 await 키워드를 사용해야 result를 받을 수 있다.
+7-4. execPopulate는 이미 반환된 결과를 다시 populate 하는 메서드이다. 
+
+7-3. 실행 순서
+1. 기본 쿼리 실행
+2. 참조된 문서의 ID 수집 : ref로 지정된 ObjectId
+3. 두 번쨰 쿼리 실행 : ObjectId에 해당하는 문서 get
+4. 결과 조합
+
+
+8. select
+8-1. 쿼리 결과에서 특정 필드만 선택할 수 있게 해준다.
+8-2. 필요한 데이터만 get
+8-3. select('title', 'content') => title과 content 필드만 가져온다.
+
 
 

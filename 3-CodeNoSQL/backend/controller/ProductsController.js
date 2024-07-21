@@ -7,6 +7,7 @@ exports.postProduct = (req, res, next) => {
     title,
     price,
     description,
+    userId: req.user.id,
   });
 
   product.save().then((result) => {
@@ -18,7 +19,6 @@ exports.postProduct = (req, res, next) => {
 exports.getAllProducts = (req, res, next) => {
   Products.find()
     .then((result) => {
-      console.log(result);
       return res.json(result);
     })
     .catch((err) => {
@@ -39,7 +39,7 @@ exports.getOneProduct = (req, res, next) => {
 };
 
 exports.updateProduct = (req, res, next) => {
-  console.log(req.body)
+  console.log(req.body);
   const { title, price, description, _id } = req.body;
 
   Products.findById(_id)
@@ -58,14 +58,15 @@ exports.updateProduct = (req, res, next) => {
     });
 };
 
-exports.deleteProduct = (req, res, next)=>{
+exports.deleteProduct = (req, res, next) => {
   const prodId = req.params.prodId;
 
-  Products.findByIdAndDelete(prodId).then(result => {
-    console.log(result);
-    return res.json(result)
-  }).catch(err => {
-    console.log(err);
-  })
-
-}
+  Products.findByIdAndDelete(prodId)
+    .then((result) => {
+      console.log(result);
+      return res.json(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

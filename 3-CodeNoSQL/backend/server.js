@@ -2,8 +2,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const Mongoose = require("mongoose");
 
+const Users = require("./models/Users");
+
 const UserRouter = require("./router/UserRouter");
-const ProductRouter = require('./router/ProductRouter')
+const ProductRouter = require("./router/ProductRouter");
 
 const app = express();
 
@@ -23,14 +25,37 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((req, res, next) => {
+  Users.findById("669ca882d6acb706eae44b4b").then((user) => {
+    req.user = user;
+    next();
+  });
+});
+
 app.use("/auth", UserRouter);
 
-app.use('/product', ProductRouter)
+app.use("/product", ProductRouter);
+
 
 Mongoose.connect(
   "mongodb+srv://feelchok1234:q2tlxm123@cluster0.o4tlmsf.mongodb.net/shop?retryWrites=true&w=majority&appName=Cluster0"
-).then(result => {
-    app.listen(4000, ()=>{
-        console.log('4000 Port Conenct')
+).then((result) => {
+  Users.findOne()
+    .then((user) => {
+      if (!user) {
+        const user = new Users({
+          name: "HWT",
+          email: "dnjsxoghd@naver.com",
+          cart: {
+            items: [],
+          },
+        });
+        return user.save();
+      }
     })
-})
+    .then(() => {
+      app.listen(4000, () => {
+        console.log(`${4000} Port Connect`);
+      });
+    });
+});

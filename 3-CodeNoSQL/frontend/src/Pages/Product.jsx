@@ -7,13 +7,15 @@ function Product() {
   const [modal, setModal] = useState(false);
 
   const productOneData = useLoaderData();
-
-  console.log(modal);
-
-
   return (
     <>
-      {modal ? <Modal ref={modalRef} setModal={setModal} _id={productOneData._id}></Modal> : null}
+      {modal ? (
+        <Modal
+          ref={modalRef}
+          setModal={setModal}
+          _id={productOneData._id}
+        ></Modal>
+      ) : null}
       <div className="flex flex-col items-center">
         <h1 className="mt-10 text-3xl mb-2">Product</h1>
         <div className="border-[1px] p-1 rounded-lg flex flex-col items-center">
@@ -30,7 +32,7 @@ function Product() {
             </Link>
             <button
               className="border-[1px] p-1  rounded-lg"
-              onClick={()=>setModal(true)}
+              onClick={() => setModal(true)}
             >
               Delete
             </button>
