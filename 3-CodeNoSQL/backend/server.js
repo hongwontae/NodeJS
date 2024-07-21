@@ -26,36 +26,26 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  Users.findById("669ca882d6acb706eae44b4b").then((user) => {
-    req.user = user;
+  const id = req.body._id;
+
+  if (id) {
+    Users.findById(id).then((user) => {
+      req.user = user;
+      next();
+    });
+  } else {
     next();
-  });
+  }
 });
 
 app.use("/auth", UserRouter);
 
 app.use("/product", ProductRouter);
 
-
 Mongoose.connect(
   "mongodb+srv://feelchok1234:q2tlxm123@cluster0.o4tlmsf.mongodb.net/shop?retryWrites=true&w=majority&appName=Cluster0"
 ).then((result) => {
-  Users.findOne()
-    .then((user) => {
-      if (!user) {
-        const user = new Users({
-          name: "HWT",
-          email: "dnjsxoghd@naver.com",
-          cart: {
-            items: [],
-          },
-        });
-        return user.save();
-      }
-    })
-    .then(() => {
-      app.listen(4000, () => {
-        console.log(`${4000} Port Connect`);
-      });
-    });
+  app.listen(4000, () => {
+    console.log("Port 4000 Connect");
+  });
 });

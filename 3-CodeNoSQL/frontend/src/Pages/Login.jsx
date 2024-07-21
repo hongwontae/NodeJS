@@ -1,10 +1,37 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../http/user-http";
 
 function Login() {
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
   const navigation = useNavigate();
 
-  function logintest() {
+  async function logintest() {
+    const userData = await loginUser(user);
+    localStorage.setItem("user", userData.result[0]._id);
     navigation("/");
+  }
+
+  function emailGet(e) {
+    setUser((prev) => {
+      return {
+        ...prev,
+        email: e.target.value,
+      };
+    });
+  }
+
+  function passwordGet(e) {
+    setUser((prev) => {
+      return {
+        ...prev,
+        password: e.target.value,
+      };
+    });
   }
 
   return (
@@ -14,12 +41,24 @@ function Login() {
         <form className="flex flex-col gap-4 items-center">
           <div className="flex flex-col items-center">
             <label htmlFor="email">Email</label>
-            <input id="email" type="text" className="text-center"></input>
+            <input
+              id="email"
+              type="text"
+              className="text-center"
+              value={user.email}
+              onChange={emailGet}
+            ></input>
           </div>
 
           <div className="flex flex-col items-center">
             <label htmlFor="password">Password</label>
-            <input id="password" type="text" className="text-center"></input>
+            <input
+              id="password"
+              type="text"
+              className="text-center"
+              value={user.password}
+              onChange={passwordGet}
+            ></input>
           </div>
 
           <button

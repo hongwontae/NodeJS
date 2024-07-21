@@ -6,6 +6,7 @@ function Signup() {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
+    name: "",
   });
 
   const navigate = useNavigate();
@@ -24,6 +25,15 @@ function Signup() {
       return {
         ...prev,
         password: e.target.value,
+      };
+    });
+  }
+
+  function nameHandler(e) {
+    setUserData((prev) => {
+      return {
+        ...prev,
+        name: e.target.value,
       };
     });
   }
@@ -52,6 +62,15 @@ function Signup() {
             className="text-center"
             onChange={passwordHandler}
             value={userData.password}
+          ></input>
+
+          <label htmlFor="name">Name</label>
+          <input
+            id="name"
+            type="text"
+            className="text-center"
+            onChange={nameHandler}
+            value={userData.name}
           ></input>
 
           <button
