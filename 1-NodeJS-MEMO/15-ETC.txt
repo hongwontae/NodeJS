@@ -58,6 +58,7 @@
 => JWT를 식별하기 위해 Bearer를 관행적으로 사용한다.
 
 5. JWT.sign()으로 만료시간을 정하면 verify 함수가 자동으로 검사한다.
+=> 첫 번쨰 인자는 payload, 두 번쨰 인자는 비밀키, 세 번쨰 인자는 options(만료시간..)
 
 
 12. req.get('header-Name');

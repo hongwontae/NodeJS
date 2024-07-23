@@ -29,7 +29,7 @@ graphql, graph-http (express-graphql은 더 이상 지원하지 않는다)
 
 
 6. 클라이언트에서 Graphql 요청 보내기
-6-1. bodu : JSON.stringify({
+6-1. body : JSON.stringify({
     query (Graphql 요청임을 나타낸다.) : `
         query{ // graphql get인 Query을 나타낸다. mutation이 될 수 도 있다.
         hello{ // 스키마의 Query의 hello 메서드를 호출한다. 리졸브에 존재한다.

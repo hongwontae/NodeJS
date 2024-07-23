@@ -17,7 +17,7 @@
 
 
 5. client.db(..).command(..);
-5-1. 선택된 db에 내리면 명령어을 기술하는 메서드
+5-1. 선택된 db에 내리면 명령어를 기술하는 메서드
 
 
 6. client.db().collection('')

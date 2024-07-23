@@ -8,6 +8,7 @@
 => Subscription: 실시간 데이터를 다루기 위해 사용됩니다.
 => type: 객체의 구조를 정의합니다.
 6-4. !는 not null을 의미한다.
+6-5. 인수 객체를 사용할 떄는 input이라는 키워드를 사용한다.
 
 6-5. ex)
 buildSchema(`

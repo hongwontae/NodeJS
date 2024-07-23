@@ -19,7 +19,7 @@ io.on('connection', (socket) => {
     socket.on('sendMessage', (message) => {
         console.log('Message received:', message);
 
-        // 클라이언트에게 응답 보내기
+        // 클라이언트에게 응답 보내기@
         socket.emit('newMessage', );
     });
 

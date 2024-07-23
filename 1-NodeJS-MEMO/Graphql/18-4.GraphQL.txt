@@ -1,0 +1,35 @@
+1. 리졸버 함수는 schema에서 정의한 인수들을 받을 수 있다.
+=> 첫 번쨰 매개변수가 정의한 인수, 두 번쨰 매개변수가 req이다.
+
+
+2. 리졸버 내에서 promise를 사용해도 되지만 return 키워드와 함꼐 사용해야 한다. 그렇지 않으면 기다리지 않는다.
+=> 그렇기 때문에 async await를 사용한다./ async를 사용하면 잘 기다린다.
+
+
+3. 스키마 내부에서 type query는 하나라도 존재해야 한다. Mutation은 아예 없어도 된다.
+
+
+4. 일반적인 Mutation 요청방법
+{
+    "query" : mutation($userInput : inputData!!){createUser(userInput : $userInput){_id, email, password, name}},
+    "variables" : {
+        "userInput" : {
+            "email" : "dnjsxoghd..",
+            "password" : "..",
+            "name" : "..."
+        }
+    }
+} => 스키마에서 정의한 mutation을 그대로 쓰지만 리졸버의 인수가 될 변수에 $을 사용한다.
+=> 리졸버을 정의할 부분에 내가 가져올 데이터를 정의한다.
+=> variables를 통해 보내줄 데이터를 정의할 떄 객체로 보내는 것이기 때문에 userInput이라는 변수에 담아서 보낸다.
+
+
+5. createHandler({formatError(err){
+    ...
+}})
+5-1. GraphQL에서 발생하는 에러를 포맷하거나 수정하는데 사용된다.
+5-2. 클라이언트에게 전송되는 에러 메시지 커스텀, 추가 정보 제공할 떄 사용된다.
+5-3. GraphQl 요청이 들어와서 리졸버에서 처리를 할 떄 에러가 throw되면 해당 에러 정보와 함꼐 formatError로 가서 처리된다.
+5-4. err.originalError : throw 할 떄 생성한 정보를 모두 가지고 있다.
+5-5. formatError에서 return 하면 알아서 알맞은 클라이언트 응답 객체로 바뀌어서 전송된다.
+
