@@ -1,8 +1,8 @@
 const User = require("../models/user");
-const Post = require('../models/post');
+const Post = require("../models/post");
 const bcrypt = require("bcrypt");
 const jsonToken = require("jsonwebtoken");
-const validator = require('validator')
+const validator = require("validator");
 
 const resolvers = {
   createUser: async function ({ userInput }, req) {
@@ -79,39 +79,35 @@ const resolvers = {
     );
 
     return {
-        token,
-        userId : user._id.toString()
-    }
-
+      token,
+      userId: user._id.toString(),
+    };
   },
 
-  createPost : async function({userInput}, {req}){
-
-
-    if(!req.isAuth){
-      throw new Error('인증 실패');
+  createPost: async function ({ userInput }, { req }) {
+    if (!req.isAuth) {
+      throw new Error("인증 실패");
     }
 
     const title = userInput.title;
     const content = userInput.content;
     const imageUrl = userInput.imageUrl;
 
-    
-    if(validator.isEmpty(title)){
-      console.log('Fail')
+    if (validator.isEmpty(title)) {
+      console.log("Fail");
     }
 
-    const user = await User.findById(req.userId)
+    const user = await User.findById(req.userId);
 
-    if(!user){
-      throw new Error('해당되는 user 없음')
+    if (!user) {
+      throw new Error("해당되는 user 없음");
     }
 
     const post = new Post({
-        title : title,
-        content : content,
-        imageUrl : imageUrl,
-        creator : user
+      title: title,
+      content: content,
+      imageUrl: imageUrl,
+      creator: user,
     });
 
     const postData = await post.save();
@@ -122,14 +118,30 @@ const resolvers = {
     console.log(user._doc);
 
     return {
-        ...postData._doc,
-        _id : postData._id.toString(),
-        createdAt : postData.createdAt.toISOString(),
-        updatedAt : postData.updatedAt.toISOString()
+      ...postData._doc,
+      _id: postData._id.toString(),
+      createdAt: postData.createdAt.toISOString(),
+      updatedAt: postData.updatedAt.toISOString(),
+    };
+  },
+
+  posts: async function () {
+    const postAllCount = await Post.find().countDocuments();
+
+    const post = await Post.find().sort({ createdAt: -1 }).populate("creator");
+
+    return {
+      posts: post.map((p) => {
+        return {
+          ...p._doc,
+          _id: p._id.toString(),
+          createdAt: p.createdAt.toISOString(),
+          updatedAt: p.updatedAt.toISOString(),
+        };
+      }),
+      totalPages : postAllCount
     }
-
-
-  }
+  },
 };
 
 module.exports = resolvers;

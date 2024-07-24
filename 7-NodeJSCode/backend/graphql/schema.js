@@ -39,14 +39,19 @@ const Schema = buildSchema(`
         creator : String!
     }
 
+    type pData {
+        posts : [Post!]
+        totalPages : Int!
+    }
+
     type RootMutation {
     createUser(userInput : inputData!) : User!
     createPost(userInput : postData!) : Post!
-
     }
 
     type loginQuery {
     login(email : String!, password : String!) : Auth!
+    posts : pData!
 }
 
     schema {

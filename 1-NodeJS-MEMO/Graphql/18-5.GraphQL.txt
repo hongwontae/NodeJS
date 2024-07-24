@@ -19,3 +19,32 @@
 
 5. GraphQL에서 리졸버의 return 값을 명시했음에도 불구하고 클라이언트에서 리턴되는 값을 다르게 지정하면 클라이언트가 요구한
 값만 가져온다.
+
+
+6. 정확한 Client GraphQL JSON 구조
+6-1. 인자가 없는 경우 : {
+    "query" : {
+        method{
+            returnValue
+            returnValue
+        }
+    }
+}
+
+6-2. 인자가 존재하는 경우 :{
+    "query" : "query($userInput : inputData){
+        queryName(userInput : $userInput){
+            returnValue
+            returnValue
+        }
+    }",
+    "variables" : {
+        "userInput" : {
+            returnData,
+            returnData,
+            returnData,
+            ...
+        }
+    }
+}
+
