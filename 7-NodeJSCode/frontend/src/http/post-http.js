@@ -1,7 +1,7 @@
 export async function post(title, content, imageUrl){
     const query = {
         query : `
-            mutation($userInput : postData!){
+            mutation login($userInput : postData!){
                 createPost(userInput : $userInput){
                     _id
                     title

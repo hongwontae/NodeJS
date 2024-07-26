@@ -30,10 +30,11 @@
         }
     }
 }
+=> 인자가 없는 경우 6-2의 query customQueryName() 처리가 필요없어진 것 뿐이다.
 
 6-2. 인자가 존재하는 경우 :{
-    "query" : "query($userInput : inputData){
-        queryName(userInput : $userInput){
+    "query" : "query customQueryName(있어도 되고 없어도 된다.)($userInput : inputData){
+        methodName(userInput : $userInput){
             returnValue
             returnValue
         }
@@ -47,4 +48,17 @@
         }
     }
 }
+
+*** 백엔드 스키마에서 !를 통해서 required를 구현했다면 프론트엔드 요청문에도 !가 들어가야 한다.
+=> 처음 query or muation ($userInput : inputData!)
+
+
+*** 처음에 {} 안에 모든 문이 존재
+*** 인자가 없는 경우는 query라는 식별자 : { 메서드 }
+=> {
+    query : {
+        method
+    }
+}
+
 

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const { createHandler } = require("graphql-http/lib/use/express");
+const bodyParser = require('body-parser');
 
 const schema = require("./graphql/schema");
 const resolvers = require("./graphql/resolvers");
@@ -8,6 +9,9 @@ const resolvers = require("./graphql/resolvers");
 const isAuth = require("./util/isAuth");
 
 const app = express();
+
+
+app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -21,6 +25,7 @@ app.use((req, res, next) => {
   }
   next();
 });
+
 
 app.use(isAuth);
 
