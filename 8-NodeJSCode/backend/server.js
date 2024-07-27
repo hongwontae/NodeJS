@@ -1,12 +1,22 @@
 const express = require("express");
 const Mongoose = require("mongoose");
 const { createHandler } = require("graphql-http/lib/use/express");
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const fs = require('fs');
+const path = require('path')
+
 
 const Schema = require("./GraphQL/Schema");
 const Resolvers = require("./GraphQL/Resolvers");
+const morgan = require("morgan");
+
+const logStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags : 'a'})
+
+require('dotenv').config();
 
 const app = express();
+
+app.use(morgan('combined', {stream : logStream}));
 
 app.use(bodyParser.json());
 
@@ -30,10 +40,9 @@ app.use("/graphql", (req, res, next) => {
   handler(req, res, next);
 });
 
-Mongoose.connect(
-  "mongodb+srv://feelchok1234:q2tlxm123@cluster0.o4tlmsf.mongodb.net/customShop?retryWrites=true&w=majority&appName=Cluster0"
-).then((result) => {
+Mongoose.connect(process.env.DB_URI).then((result) => {
   app.listen(4000, () => {
+    console.log(`${process.env.PORT}`);
     console.log("4000 Port Open");
   });
 });
