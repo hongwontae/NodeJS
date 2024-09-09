@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { login } from "../http/user-http";
+import { loginHTTP } from "../http/user-http";
 
 function Login(){
 
@@ -7,7 +7,7 @@ function Login(){
     const passwordRef = useRef(null);
 
     async function loginHandler(){
-        const loginData = await login(emailRef.current.value, passwordRef.current.value);
+        const loginData = await loginHTTP(emailRef.current.value, passwordRef.current.value);
 
         console.log(loginData)
     }

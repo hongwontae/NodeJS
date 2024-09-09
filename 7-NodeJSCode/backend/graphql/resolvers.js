@@ -85,6 +85,7 @@ const resolvers = {
   },
 
   createPost: async function ({ userInput }, { req }) {
+    console.log(req.isAuth)
     if (!req.isAuth) {
       throw new Error("인증 실패");
     }

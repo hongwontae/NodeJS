@@ -31,7 +31,7 @@ export async function signupPost(email, password, name) {
   return resData;
 }
 
-export async function login(email, password){
+export async function loginHTTP(email, password){
 
   console.log(email, password)
 
@@ -57,6 +57,7 @@ export async function login(email, password){
   });
 
   const resData = await response.json();
+  console.log(resData)
   localStorage.setItem('token', resData.data.login.token);
 
   return resData;
