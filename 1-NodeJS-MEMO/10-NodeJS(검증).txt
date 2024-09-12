@@ -4,12 +4,12 @@
 
 2. 입력 검증 방법
 2-1. Client에서 데이터를 서버에서 보내기 전에 유효성 검사를 실시할 수 있다.
-2-2. Server에서 DB에 저장하기 전에 유효성 감사를 실시한다.
+2-2. Server에서 DB에 저장하기 전에 유효성 검사를 실시한다.
 
 
 3. express-validator
 3-1. 설치 방법 : npm install express-validator
-3-2. 적용 : server => router => controller 단계에서 router 단계에서 실행한다.
+3-2. 적용 : server => router => controller 일련의 과정에서 router 단계에서 실행한다.
 
 3-3. body or check
 body => 요청 본문에 관해서 유효성 검사를 실시한다.

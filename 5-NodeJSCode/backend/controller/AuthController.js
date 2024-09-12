@@ -14,7 +14,7 @@ exports.signup = async (req, res, next) => {
       "express-validator의 유효성 검사에서 에러가 발생했습니다."
     );
     errorData.reason = expressValidatorOBJ.array();
-    errorData.statusCode = 404;
+    errorData.statusCode = 404
     next(errorData);
   }
 
