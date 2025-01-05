@@ -6,7 +6,7 @@ const Items = sequelize.define('items',{
         type : DataTypes.INTEGER,
         primaryKey : true,
         autoIncrement : true,
-        allowNull : false
+        allowNull : false,
     },
     title : {
         type : DataTypes.STRING,

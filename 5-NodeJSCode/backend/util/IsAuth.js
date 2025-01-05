@@ -12,7 +12,7 @@ module.exports = (req, res, next)=>{
     JWT.verify(token, secretKey.SECRET_KEY, (err,decoded)=>{
         if(err){
             if(err.name === 'TokenExpiredError'){
-                return res.status(401).json({message : 'Token ha Exipred'});
+                return res.status(401).json({message : 'Token has Exipred'});
             }
             return res.status(401).json({message : 'Token Verify Error Occurred!'});
         }

@@ -1,0 +1,2 @@
+1. bodyParser 라이브러리는 deprecated 되었습니다.
+=> 따라서 app.use(express.json()), app.use(express.urlencoded())를 사용해서 application/json, formData를 받아들입니다.
